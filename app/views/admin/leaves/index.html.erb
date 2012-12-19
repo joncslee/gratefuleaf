@@ -1,0 +1,17 @@
+<% title "Admin/Leaves" %>
+
+<table>
+  <tr>
+    <th>Content</th>
+  </tr>
+  <% for leaf in @leaves %>
+    <tr>
+      <td><%= leaf.content %></td>
+      <td><%= link_to "Show", [:admin, leaf] %></td>
+      <td><%= link_to "Edit", edit_admin_leaf_path(leaf) %></td>
+      <td><%= link_to "Destroy", [:admin, leaf], :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Admin/Leaf", new_admin_leaf_path %></p>

@@ -1,0 +1,12 @@
+<% title "Admin/Leaf" %>
+
+<p>
+  <strong>Content:</strong>
+  <%= @leaf.content %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_admin_leaf_path(@leaf) %> |
+  <%= link_to "Destroy", [:admin, @leaf], :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", admin_leaves_path %>
+</p>

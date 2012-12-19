@@ -1,0 +1,16 @@
+<% title "Admin/Rank" %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @rank.name %>
+</p>
+<p>
+  <strong>Image Url:</strong>
+  <%= @rank.image_url %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_admin_rank_path(@rank) %> |
+  <%= link_to "Destroy", [:admin, @rank], :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", admin_ranks_path %>
+</p>
