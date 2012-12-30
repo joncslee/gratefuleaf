@@ -1,12 +1,15 @@
 Gratefuleaf::Application.routes.draw do
+
   namespace(:admin){ resources :ranks }
-
   namespace(:admin){ resources :badges }
-
   namespace(:admin){ resources :leaves }
-
   namespace(:admin){ resources :users }
 
+  match '/login' => 'user_sessions#new'
+  match '/logout' => 'user_sessions#destroy'
+  resources :user_sessions
+
+  resources :users
 
   match '/leaves' => 'leaves#index'
 

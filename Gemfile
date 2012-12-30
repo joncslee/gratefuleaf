@@ -40,3 +40,5 @@ gem 'jquery-rails'
 gem 'nifty-generators'
 
 gem "mocha", :group => :test
+
+gem "authlogic"
