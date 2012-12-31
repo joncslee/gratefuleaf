@@ -1,0 +1,12 @@
+<%= form_for @leaf do |form| %>
+<%= form.error_messages %>
+<ol class="formList">
+  <li>
+    <%= form.label :content, "Content" %>
+    <%= form.text_area :content %>
+  </li>
+  <li>
+    <%= form.submit "Submit" %>
+  </li>
+</ol>
+<% end %>

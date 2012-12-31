@@ -1,1 +1,9 @@
-landing page!
+<a class="btn" href="/leaves/new">New Leaf</a>
+<table>
+<% @leaves.each do |leaf| %>
+  <tr>
+    <td><%= leaf.created_at.to_formatted_s :short %></td>
+    <td><%= leaf.content %></td>
+  </tr>
+<% end %>
+</table>
