@@ -16,13 +16,19 @@ class LeavesController < ApplicationController
   end
 
   def create
-    if request.post?
-      @leaf = current_user.leaves.create(params[:leaf])
-      if !@leaf.save
-        redirect_to :action => 'new'
-      end
+    @leaf = current_user.leaves.create(params[:leaf])
+    if @leaf.save
+      flash[:notice] = "Leaf created successfully."
+      redirect_to :action => 'index'
+    else
+      render :action => 'new'
     end
-    redirect_to :action => 'index'
+  end
+
+  def destroy
+    @leaf = Leaf.find(params[:id])
+    @leaf.destroy
+    redirect_to leaves_url, :notice => "Successfully destroyed leaf."
   end
 
   private
