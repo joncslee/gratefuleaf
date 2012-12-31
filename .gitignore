@@ -17,3 +17,7 @@
 # Ignore Vim's tempfiles
 *.swp
 *.swo
+
+# Ignore user-uploaded images
+/public/system/users
+/public/system/leaves

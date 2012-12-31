@@ -42,3 +42,4 @@ gem 'nifty-generators'
 gem "mocha", :group => :test
 
 gem "authlogic"
+gem "paperclip", "~> 3.0"
