@@ -2,7 +2,7 @@
 <table>
   <% @leaves.each do |leaf| %>
     <tr>
-      <td><%= leaf.created_at.to_formatted_s :short %></td>
+      <td><%= link_to leaf.created_at.to_formatted_s(:short), leaf_path(leaf) %></td>
       <td><%= leaf.content %></td>
     </tr>
   <% end %>

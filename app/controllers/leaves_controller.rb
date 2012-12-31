@@ -4,18 +4,25 @@ class LeavesController < ApplicationController
   before_filter :require_login
 
   def index
+    @leaves = current_user.leaves
+  end
+
+  def new
+    @leaf = Leaf.new
+  end
+  
+  def show
+    @leaf = Leaf.find(params[:id])
+  end
+
+  def create
     if request.post?
       @leaf = current_user.leaves.create(params[:leaf])
       if !@leaf.save
         redirect_to :action => 'new'
       end
     end
-      
-    @leaves = current_user.leaves
-  end
-
-  def new
-    @leaf = Leaf.new
+    redirect_to :action => 'index'
   end
 
   private

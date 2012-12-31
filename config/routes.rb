@@ -11,8 +11,7 @@ Gratefuleaf::Application.routes.draw do
 
   resources :users
 
-  match '/leaves' => 'leaves#index'
-  match '/leaves/new' => 'leaves#new'
+  resources :leaves
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
