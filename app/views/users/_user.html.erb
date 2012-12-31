@@ -1,7 +1,7 @@
 <%= form_for user, :html => { :multipart => true } do |form| %>
 <%= form.error_messages %>
 
-<%= image_tag @user.avatar.url %><br />
+<%= image_tag @user.avatar.url(:medium) %><br />
 <%= form.file_field :avatar %>
 
 <ol class="formList">
