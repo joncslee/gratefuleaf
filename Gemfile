@@ -43,3 +43,4 @@ gem "mocha", :group => :test
 
 gem "authlogic"
 gem "paperclip", "~> 3.0"
+gem 'merit', ">= 1.1.2"

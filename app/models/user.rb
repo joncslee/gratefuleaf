@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_merit
+
   acts_as_authentic
   attr_accessible :first_name, :last_name, :username, :email, :password, :password_confirmation, :avatar
 

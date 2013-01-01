@@ -11,14 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121231060204) do
+ActiveRecord::Schema.define(:version => 20130101042101) do
 
-  create_table "badges", :force => true do |t|
-    t.string   "name"
-    t.string   "image_url"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "badges_sashes", :force => true do |t|
+    t.integer  "badge_id"
+    t.integer  "sash_id"
+    t.boolean  "notified_user", :default => false
+    t.datetime "created_at"
   end
+
+  add_index "badges_sashes", ["badge_id", "sash_id"], :name => "index_badges_sashes_on_badge_id_and_sash_id"
+  add_index "badges_sashes", ["badge_id"], :name => "index_badges_sashes_on_badge_id"
+  add_index "badges_sashes", ["sash_id"], :name => "index_badges_sashes_on_sash_id"
 
   create_table "leaves", :force => true do |t|
     t.text     "content"
@@ -31,9 +35,32 @@ ActiveRecord::Schema.define(:version => 20121231060204) do
     t.datetime "photo_updated_at"
   end
 
-  create_table "ranks", :force => true do |t|
-    t.string   "name"
-    t.string   "image_url"
+  create_table "merit_actions", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "action_method"
+    t.integer  "action_value"
+    t.boolean  "had_errors",    :default => false
+    t.string   "target_model"
+    t.integer  "target_id"
+    t.boolean  "processed",     :default => false
+    t.string   "log"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
+
+  create_table "merit_score_points", :force => true do |t|
+    t.integer  "score_id"
+    t.integer  "num_points", :default => 0
+    t.string   "log"
+    t.datetime "created_at"
+  end
+
+  create_table "merit_scores", :force => true do |t|
+    t.integer "sash_id"
+    t.string  "category", :default => "default"
+  end
+
+  create_table "sashes", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -44,8 +71,8 @@ ActiveRecord::Schema.define(:version => 20121231060204) do
     t.string   "username"
     t.string   "email"
     t.string   "password"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.string   "crypted_password"
     t.string   "password_salt"
     t.string   "persistence_token"
@@ -53,6 +80,8 @@ ActiveRecord::Schema.define(:version => 20121231060204) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.integer  "sash_id"
+    t.integer  "level",               :default => 0
   end
 
 end
