@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130101191306) do
+ActiveRecord::Schema.define(:version => 20130101211933) do
 
   create_table "badges_sashes", :force => true do |t|
     t.integer  "badge_id"
@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(:version => 20130101191306) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.date     "created_on"
+    t.date     "updated_on"
   end
 
   create_table "merit_actions", :force => true do |t|
@@ -83,6 +85,8 @@ ActiveRecord::Schema.define(:version => 20130101191306) do
     t.integer  "sash_id"
     t.integer  "level",               :default => 0
     t.string   "slug"
+    t.integer  "daily_leaf_goal"
+    t.integer  "weekly_leaf_goal"
   end
 
   add_index "users", ["slug"], :name => "index_users_on_slug", :unique => true

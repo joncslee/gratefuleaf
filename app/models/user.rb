@@ -14,4 +14,12 @@ class User < ActiveRecord::Base
     avatar.url != '/avatars/original/missing.png'
   end
 
+  def daily_leaves
+    self.leaves.created_today
+  end
+
+  def weekly_leaves
+    self.leaves.created_this_week
+  end
+
 end

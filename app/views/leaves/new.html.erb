@@ -9,7 +9,7 @@
     <%= form.submit "Submit" %>
   </li>
 </ol>
-<%= image_tag @leaf.photo.url %><br />
+<%= image_tag @leaf.photo.url if @leaf.has_photo %><br />
 <%= form.file_field :photo %>
 
 <% end %>
