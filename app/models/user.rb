@@ -7,4 +7,8 @@ class User < ActiveRecord::Base
   has_many :leaves
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
 
+  def has_avatar
+    avatar.url != '/avatars/original/missing.png'
+  end
+
 end

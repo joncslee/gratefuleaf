@@ -2,7 +2,7 @@
 <table>
   <% @leaves.each do |leaf| %>
     <tr>
-      <td><%= link_to leaf.created_at.to_formatted_s(:short), leaf_path(leaf) %><br /><%= image_tag leaf.photo.url(:thumb) %></td>
+      <td><%= link_to leaf.created_at.to_formatted_s(:short), leaf_path(leaf) %><br /><%= image_tag leaf.photo.url(:thumb) if leaf.has_photo %></td>
       <td><%= leaf.content %></td>
       <td><%= link_to "Destroy", leaf, :confirm => 'Are you sure?', :method => :delete %></td>
 
