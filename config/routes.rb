@@ -1,7 +1,5 @@
 Gratefuleaf::Application.routes.draw do
 
-  namespace(:admin){ resources :ranks }
-  namespace(:admin){ resources :badges }
   namespace(:admin){ resources :leaves }
   namespace(:admin){ resources :users }
 
