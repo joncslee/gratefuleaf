@@ -16,7 +16,7 @@
           <li><a href="#">About</a></li>
           <% if current_user %>
             <li class="<%= 'active' if params[:controller] == 'leaves' %>"><%= link_to "Leaves", '/leaves' %></li>
-            <li class="<%= 'active' if params[:controller] == 'users' && params[:action] == 'edit' %>"><%= link_to "Edit profile", edit_user_path(current_user.id) %></li>
+            <li class="<%= 'active' if params[:controller] == 'users' && params[:action] == 'edit' %>"><%= link_to "Edit profile", edit_user_path(current_user) %></li>
             <li><%= link_to "Logout", logout_path %></li>
           <% else %>
             <li class="<%= 'active' if params[:controller] == 'users' && params[:action] == 'new' %>"><%= link_to "Signup", new_user_path %></li>
