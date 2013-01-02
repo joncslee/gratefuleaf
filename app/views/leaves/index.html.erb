@@ -9,18 +9,16 @@
   <% end %>
 </table>
 
+<br />
+
 Points: <%= current_user.points %><br /><br />
 
 <% if current_user.goal_type == User::DAILY_LEAF_GOAL %>
+  Daily Goal Progress: 
   <%= current_user.daily_leaves.size %> / <%= current_user.daily_leaf_goal %>
 <% elsif current_user.goal_type == User::WEEKLY_LEAF_GOAL %>
+  Weekly Goal Progress: 
   <%= current_user.weekly_leaves.size %> / <%= current_user.weekly_leaf_goal %>
 <% end %>
 
-<% current_user.daily_leaves.each do |leaf| %>
-  <%= leaf.content %><br />
-<% end %>
 
-
-<%= Time.now %><br />
-<%= Time.zone %>

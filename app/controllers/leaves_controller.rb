@@ -1,5 +1,5 @@
 class LeavesController < ApplicationController
-  
+
   # only members have access to leaf sections
   before_filter :require_login
 
@@ -17,6 +17,15 @@ class LeavesController < ApplicationController
 
   def create
     @leaf = current_user.leaves.create(params[:leaf])
+
+    # extract hashtags!
+    tags = []
+    @leaf.content.scan(/(?:\s|^)(?:#(?!(?:\d+|\w+?_|_\w+?)(?:\s|$)))(\w+)(?=\s|$)/i) do |match|
+      tags.push(match.first)
+    end
+
+    #TODO: save hashtags somehow... Hashtag table w/leaf_id?
+
     if @leaf.save
       flash[:notice] = "Leaf created successfully."
       redirect_to :action => 'index'
