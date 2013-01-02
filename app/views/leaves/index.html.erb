@@ -5,9 +5,22 @@
       <td><%= link_to leaf.created_at.to_formatted_s(:short), leaf_path(leaf) %><br /><%= image_tag leaf.photo.url(:thumb) if leaf.has_photo %></td>
       <td><%= leaf.content %></td>
       <td><%= link_to "Destroy", leaf, :confirm => 'Are you sure?', :method => :delete %></td>
-
     </tr>
   <% end %>
 </table>
 
-Points: <%= current_user.points %>
+Points: <%= current_user.points %><br /><br />
+
+<% if current_user.goal_type == User::DAILY_LEAF_GOAL %>
+  <%= current_user.daily_leaves.size %> / <%= current_user.daily_leaf_goal %>
+<% elsif current_user.goal_type == User::WEEKLY_LEAF_GOAL %>
+  <%= current_user.weekly_leaves.size %> / <%= current_user.weekly_leaf_goal %>
+<% end %>
+
+<% current_user.daily_leaves.each do |leaf| %>
+  <%= leaf.content %><br />
+<% end %>
+
+
+<%= Time.now %><br />
+<%= Time.zone %>

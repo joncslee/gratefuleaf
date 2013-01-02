@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130101211933) do
+ActiveRecord::Schema.define(:version => 20130102011910) do
 
   create_table "badges_sashes", :force => true do |t|
     t.integer  "badge_id"
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(:version => 20130101211933) do
     t.string   "slug"
     t.integer  "daily_leaf_goal"
     t.integer  "weekly_leaf_goal"
+    t.integer  "goal_type",           :default => 0
   end
 
   add_index "users", ["slug"], :name => "index_users_on_slug", :unique => true

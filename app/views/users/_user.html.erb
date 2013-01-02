@@ -1,36 +1,74 @@
 <%= form_for user, :html => { :multipart => true } do |form| %>
-<%= form.error_messages %>
+  <%= form.error_messages %>
 
-<%= image_tag @user.avatar.url(:medium) if user.has_avatar %><br />
-<%= form.file_field :avatar %>
-
-<ol class="formList">
-  <li>
-    <%= form.label :first_name, "First Name" %>
-    <%= form.text_field :first_name %>
-  </li>
-  <li>
-    <%= form.label :last_name, "Last Name" %>
-    <%= form.text_field :last_name %>
-  </li>
-  <li>
-    <%= form.label :username, "Username" %>
-    <%= form.text_field :username %>
-  </li>
-  <li>
-    <%= form.label :email, "Email" %>
-    <%= form.text_field :email %>
-  </li>
-  <li>
-    <%= form.label :password, "Password" %>
-    <%= form.password_field :password %>
-  </li>
-  <li>
-    <%= form.label :password_confirmation, "Password confirmation" %>
-    <%= form.password_field :password_confirmation %>
-  </li>
-  <li>
-    <%= form.submit "Submit" %>
-  </li>
-</ol>
+  <%= image_tag @user.avatar.url(:medium) if user.has_avatar %><br />
+  <%= form.file_field :avatar %>
+  <ol class="formList">
+    <li>
+      <%= form.label :first_name, "First Name" %>
+      <%= form.text_field :first_name %>
+    </li>
+    <li>
+      <%= form.label :last_name, "Last Name" %>
+      <%= form.text_field :last_name %>
+    </li>
+    <li>
+      <%= form.label :username, "Username" %>
+      <%= form.text_field :username %>
+    </li>
+    <li>
+      <%= form.label :email, "Email" %>
+      <%= form.text_field :email %>
+    </li>
+    <li>
+      <%= form.label :goal_type, "Goal Type" %>
+      <%= form.select(:goal_type, [['No Goal', 0], ['Daily Goal', 1], ['Weekly Goal', 2]], :selected => user.goal_type) %><br />
+      <div id="daily-leaves" style="display:none;">
+        <label>Daily Goal: </label>
+        <%= form.text_field :daily_leaf_goal, :style => 'width: 60px;' %>
+      </div>
+      <div id="weekly-leaves" style="display:none;">
+        <label>Weekly Goal: </label>
+        <%= form.text_field :weekly_leaf_goal, :style => 'width: 60px;' %>
+      </div>
+    </li>
+    <li>
+      <%= form.label :password, "Password" %>
+      <%= form.password_field :password %>
+    </li>
+    <li>
+      <%= form.label :password_confirmation, "Password confirmation" %>
+      <%= form.password_field :password_confirmation %>
+    </li>
+    <li>
+      <%= form.submit "Submit" %>
+    </li>
+  </ol>
 <% end %>
+
+
+
+<script>
+  $(function() {
+    <% if current_user.goal_type == User::DAILY_LEAF_GOAL %>
+      $('div#daily-leaves').show();
+    <% elsif current_user.goal_type == User::WEEKLY_LEAF_GOAL %>
+      $('div#weekly-leaves').show();
+    <% end %>
+  });
+
+  $('select#user_goal_type').change(function() {
+    if (this.value == 1) {
+      $('div#daily-leaves').show('fast');
+      $('div#weekly-leaves').hide('fast');
+    } else if (this.value == 2) {
+      $('div#daily-leaves').hide('fast');
+      $('div#weekly-leaves').show('fast');
+    } else {
+      $('div#daily-leaves').hide('fast');
+      $('div#weekly-leaves').hide('fast');
+    }
+  });
+</script>
+
+
