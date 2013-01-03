@@ -4,7 +4,7 @@ class LeavesController < ApplicationController
   before_filter :require_login
 
   def index
-    @leaves = current_user.leaves
+    @leaves = current_user.leaves.reverse
   end
 
   def new
@@ -18,15 +18,20 @@ class LeavesController < ApplicationController
   def create
     @leaf = current_user.leaves.create(params[:leaf])
 
-    # extract hashtags!
-    tags = []
-    @leaf.content.scan(/(?:\s|^)(?:#(?!(?:\d+|\w+?_|_\w+?)(?:\s|$)))(\w+)(?=\s|$)/i) do |match|
-      tags.push(match.first)
+    # extract user mentions
+    mentions = []
+    @leaf.content.scan(/(?:\s|^)(?:@(?!(?:\d+|\w+?_|_\w+?)(?:\s|$)))(\w+)(?=\s|$)/i) do |match|
+      mentions.push(match.first)
     end
-
-    #TODO: save hashtags somehow... Hashtag table w/leaf_id?
+    # TODO: do something with mentions
 
     if @leaf.save
+
+      # extract hashtags
+      @leaf.content.scan(/(?:\s|^)(?:#(?!(?:\d+|\w+?_|_\w+?)(?:\s|$)))(\w+)(?=\s|$)/i) do |match|
+        @leaf.tags.create(:name => match.first)
+      end
+
       flash[:notice] = "Leaf created successfully."
       redirect_to :action => 'index'
     else

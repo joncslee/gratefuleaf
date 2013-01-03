@@ -1,5 +1,6 @@
 class Leaf < ActiveRecord::Base
   belongs_to :user
+  has_many :tags
 
   # named scopes for tracking the day's leaves and the week's leaves
   scope :created_today, lambda { where("created_on = ?", Date.today) }
