@@ -50,10 +50,12 @@
 
 <script>
   $(function() {
-    <% if current_user.goal_type == User::DAILY_LEAF_GOAL %>
-      $('div#daily-leaves').show();
-    <% elsif current_user.goal_type == User::WEEKLY_LEAF_GOAL %>
-      $('div#weekly-leaves').show();
+    <% if current_user %>
+      <% if current_user.goal_type == User::DAILY_LEAF_GOAL %>
+        $('div#daily-leaves').show();
+      <% elsif current_user.goal_type == User::WEEKLY_LEAF_GOAL %>
+        $('div#weekly-leaves').show();
+      <% end %>
     <% end %>
   });
 
