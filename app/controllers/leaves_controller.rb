@@ -27,6 +27,9 @@ class LeavesController < ApplicationController
 
     if @leaf.save
 
+      # add points for successful creation!
+      current_user.add_points(2)
+
       # extract hashtags
       @leaf.content.scan(/(?:\s|^)(?:#(?!(?:\d+|\w+?_|_\w+?)(?:\s|$)))(\w+)(?=\s|$)/i) do |match|
         @leaf.tags.create(:name => match.first)
