@@ -27,6 +27,10 @@ class LeavesController < ApplicationController
 
     Leaf.transaction do
       if @leaf.save
+
+        # add points for successful creation!
+        current_user.add_points(2)
+
         flash[:notice] = "Leaf created successfully."
         redirect_to :action => 'index'
       else
