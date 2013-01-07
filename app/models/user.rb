@@ -1,9 +1,10 @@
 class User < ActiveRecord::Base
   has_many :leaves
+  has_many :tags, :through => :leaves
   has_merit
 
   acts_as_authentic
-  attr_accessible :first_name, :last_name, :username, :email, :password, :password_confirmation, :avatar, :goal_type, :daily_leaf_goal, :weekly_leaf_goal
+  attr_accessible :first_name, :last_name, :username, :email, :password, :password_confirmation, :avatar, :goal_type, :daily_leaf_goal, :weekly_leaf_goal, :time_zone
 
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
 
@@ -21,6 +22,7 @@ class User < ActiveRecord::Base
   def weekly_leaves
     self.leaves.created_this_week
   end
+
 
   # goal types: none, daily, or weekly
   NO_LEAF_GOAL = 0

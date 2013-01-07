@@ -33,6 +33,10 @@
       </div>
     </li>
     <li>
+      <%= form.label :time_zone, "Your Time Zone" %>
+      <%= form.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, :selected => user.time_zone %>
+    </li>
+    <li>
       <%= form.label :password, "Password" %>
       <%= form.password_field :password %>
     </li>
