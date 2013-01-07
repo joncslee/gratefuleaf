@@ -28,7 +28,11 @@ class LeavesController < ApplicationController
     if @leaf.save
 
       # add points for successful creation!
-      current_user.add_points(2)
+      if @leaf.photo_file_name
+        current_user.add_points(3)
+      else
+        current_user.add_points(2)
+      end
 
       # extract hashtags
       @leaf.content.scan(/(?:\s|^)(?:#(?!(?:\d+|\w+?_|_\w+?)(?:\s|$)))(\w+)(?=\s|$)/i) do |match|
@@ -44,6 +48,13 @@ class LeavesController < ApplicationController
 
   def destroy
     @leaf = Leaf.find(params[:id])
+
+    if @leaf.photo_file_name
+      current_user.substract_points(3)
+    else
+      current_user.substract_points(2)
+    end
+
     @leaf.destroy
     redirect_to leaves_url, :notice => "Successfully destroyed leaf."
   end
