@@ -16,7 +16,7 @@ class LeavesController < ApplicationController
   end
 
   def create
-    @leaf = current_user.leaves.create(params[:leaf])
+    @leaf = current_user.leaves.new(params[:leaf])
 
     # extract user mentions
     mentions = []
@@ -25,24 +25,19 @@ class LeavesController < ApplicationController
     end
     # TODO: do something with mentions
 
-    if @leaf.save
-
-      # add points for successful creation!
-      if @leaf.photo_file_name
-        current_user.add_points(3)
+    Leaf.transaction do
+      if @leaf.save
+        # add points for successful creation!
+        if @leaf.photo_file_name
+          current_user.add_points(3)
+        else
+          current_user.add_points(2)
+        end
+        flash[:notice] = "Leaf created successfully."
+        redirect_to :action => 'index'
       else
-        current_user.add_points(2)
+        render :action => 'new'
       end
-
-      # extract hashtags
-      @leaf.content.scan(/(?:\s|^)(?:#(?!(?:\d+|\w+?_|_\w+?)(?:\s|$)))(\w+)(?=\s|$)/i) do |match|
-        @leaf.tags.create(:name => match.first)
-      end
-
-      flash[:notice] = "Leaf created successfully."
-      redirect_to :action => 'index'
-    else
-      render :action => 'new'
     end
   end
 

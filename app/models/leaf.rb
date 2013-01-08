@@ -10,9 +10,19 @@ class Leaf < ActiveRecord::Base
 
   validates_presence_of :content
 
+  # after_save gets called multiple times because of associations
+  after_commit :save_tags
+
   has_attached_file :photo, :styles => { :medium => "300x300>", :thumb => "100x100>" }
 
   def has_photo
     photo.url != '/photos/original/missing.png'
+  end
+
+  def save_tags
+    # extract hashtags
+    content.scan(/(?:\s|^)(?:#(?!(?:\d+|\w+?_|_\w+?)(?:\s|$)))(\w+)(?=\s|$)/i) do |match|
+      self.tags.create(:name => match.first)
+    end
   end
 end
