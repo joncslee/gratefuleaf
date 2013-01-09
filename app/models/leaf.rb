@@ -10,6 +10,8 @@ class Leaf < ActiveRecord::Base
 
   validates_presence_of :content
 
+  before_save :convert_links
+
   # after_save gets called multiple times because of associations
   after_commit :save_tags
 
@@ -19,10 +21,42 @@ class Leaf < ActiveRecord::Base
     photo.url != '/photos/original/missing.png'
   end
 
+  # convert tags, links, and users into links
+  def convert_links
+
+    # fetch leaf content
+    c = self.content
+
+    # regexps
+    # url = /( |^)http:\/\/([^\s]*\.[^\s]*)( |$)/
+    tag = /( |^)#(\w+)( |$)/
+    user = /( |^)@(\w+)( |$)/
+    
+    #replace #tags with links to that tag search
+    while c =~ tag
+      c.sub! "##{$2}", "<a href='/leaves?tagged=#{$2}'>##{$2}</a>"
+    end
+
+    #replace @usernames with links to that user, if user exists
+    while c =~ user
+      c.sub! "@#{$2}", "<a href='/users/#{$2}'>@#{$2}</a>"
+    end
+
+    #replace urls with links
+    #while c =~ url
+      #name = $2
+      #c.sub! /( |^)http:\/\/#{name}( |$)/, " <a href='http://#{name}' >#{name}</a> "
+    #end
+
+    self.content = c
+
+  end
+
   def save_tags
     # extract hashtags
-    content.scan(/(?:\s|^)(?:#(?!(?:\d+|\w+?_|_\w+?)(?:\s|$)))(\w+)(?=\s|$)/i) do |match|
+    content.scan(/(?:\s|^|>)(?:#(?!(?:\d+|\w+?_|_\w+?)(?:\s|$)))(\w+)(?=\s|$|<)/i) do |match|
       self.tags.create(:name => match.first)
     end
   end
+
 end
