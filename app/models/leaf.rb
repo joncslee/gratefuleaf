@@ -32,6 +32,8 @@ class Leaf < ActiveRecord::Base
     tag = /( |^)#(\w+)( |$)/
     user = /( |^)@(\w+)( |$)/
     
+    #TODO: make sure no one is typing javascript into the field **IMPORTANT**
+
     #replace #tags with links to that tag search
     while c =~ tag
       c.sub! "##{$2}", "<a href='/leaves?tagged=#{$2}'>##{$2}</a>"
