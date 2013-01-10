@@ -1,24 +1,26 @@
-<table>
-  <% @leaves_by_day.each do |day, leaves| %>
-    <tr class="day-header">
-      <td><%= day.strftime("%A, %b %d, %Y") %></td>
-    </tr>
-    <% leaves.each do |leaf| %>
-      <tr>
-        <td><%= link_to leaf.created_at.strftime("%-I:%S %p"), leaf_path(leaf) %><br /><%= image_tag leaf.photo.url(:thumb) if leaf.has_photo %></td>
-        <td><%= leaf.content.html_safe %></td>
-        <td>
-          <% if leaf.has_tags %>
-            <% leaf.tags.each do |tag| %>
-              <a href="/leaves?tagged=<%= tag.name %>">#<%= tag.name %></a>
-            <% end %>
-          <% end %>
-        </td>
-        <td><%= link_to "Destroy", leaf, :confirm => 'Are you sure?', :method => :delete %></td>
+<div class="leaf-feed">
+  <table>
+    <% @leaves_by_day.each do |day, leaves| %>
+      <tr class="day-header">
+        <td><h3><%= day.strftime("%A, %b %d, %Y") %></h3></td>
       </tr>
+      <% leaves.each do |leaf| %>
+        <tr>
+          <td><%= link_to leaf.created_at.strftime("%-I:%M %p"), leaf_path(leaf) %><br /><%= image_tag leaf.photo.url(:thumb) if leaf.has_photo %></td>
+          <td><%= leaf.content.html_safe %></td>
+          <td>
+            <% if leaf.has_tags %>
+              <% leaf.tags.each do |tag| %>
+                <a href="/leaves?tagged=<%= tag.name %>">#<%= tag.name %></a>
+              <% end %>
+            <% end %>
+          </td>
+          <td><%= link_to "Destroy", leaf, :confirm => 'Are you sure?', :method => :delete %></td>
+        </tr>
+      <% end %>
     <% end %>
-  <% end %>
-</table>
+  </table>
+</div>
 
 <br />
 
@@ -35,6 +37,8 @@ Points: <%= current_user.points %>
   Weekly Goal Progress: 
   <%= current_user.weekly_leaves.size %> / <%= current_user.weekly_leaf_goal %>
 <% end %>
+<br />
+<%= Time.now.strftime("%-I:%M %p") %>
 
 </div>
 

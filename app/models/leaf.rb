@@ -36,7 +36,7 @@ class Leaf < ActiveRecord::Base
 
     #replace #tags with links to that tag search
     while c =~ tag_regex
-      c.sub! "##{$2}", "<a href='/leaves?tagged=#{$2}'>##{$2}</a>"
+      c.gsub! "##{$2}", "<a href='/leaves?tagged=#{$2}'>##{$2}</a>"
       self.has_tags = true
     end
 
