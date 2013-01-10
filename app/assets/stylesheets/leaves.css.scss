@@ -1,3 +1,13 @@
 // Place all the styles related to the Leaves controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+div.leaf-feed {
+  float: left;
+  width: 70%;
+}
+
+div.leaf-progress {
+  float: right;
+  width: 20%;
+}

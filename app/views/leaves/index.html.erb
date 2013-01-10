@@ -1,22 +1,25 @@
-<a class="btn" href="/leaves/new">New Leaf</a>
-<table>
-  <% @leaves.each do |leaf| %>
-    <tr>
-      <td><%= link_to leaf.created_at.to_formatted_s(:short), leaf_path(leaf) %><br /><%= image_tag leaf.photo.url(:thumb) if leaf.has_photo %></td>
-      <td><%= leaf.content %></td>
-      <td>
-        <% leaf.tags.each do |tag| %>
-          #<%= tag.name %> 
-        <% end %>
-      </td>
-      <td><%= link_to "Destroy", leaf, :confirm => 'Are you sure?', :method => :delete %></td>
-    </tr>
-  <% end %>
-</table>
+<div class="leaf-feed">
+  <table>
+    <% @leaves.each do |leaf| %>
+      <tr>
+        <td><%= link_to leaf.created_at.to_formatted_s(:short), leaf_path(leaf) %><br /><%= image_tag leaf.photo.url(:thumb) if leaf.has_photo %></td>
+        <td><%= leaf.content %></td>
+        <td>
+          <% leaf.tags.each do |tag| %>
+            #<%= tag.name %> 
+          <% end %>
+        </td>
+        <td><%= link_to "Destroy", leaf, :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
 
-<br />
-
-Points: <%= current_user.points %><br /><br />
+<div class="leaf-progress">
+  <div class="progress">
+    <div class="bar" style="width: <%= goal_percentage %>%;"></div>
+  </div>
+Points: <%= current_user.points %>
 
 <% if current_user.goal_type == User::DAILY_LEAF_GOAL %>
   Daily Goal Progress: 
@@ -26,4 +29,7 @@ Points: <%= current_user.points %><br /><br />
   <%= current_user.weekly_leaves.size %> / <%= current_user.weekly_leaf_goal %>
 <% end %>
 
+</div>
 
+<div style="clear:both;"></div>
+<a class="btn" href="/leaves/new">New Leaf</a>
