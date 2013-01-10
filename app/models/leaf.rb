@@ -29,19 +29,22 @@ class Leaf < ActiveRecord::Base
 
     # regexps
     # url = /( |^)http:\/\/([^\s]*\.[^\s]*)( |$)/
-    tag = /( |^)#(\w+)( |$)/
-    user = /( |^)@(\w+)( |$)/
+    tag_regex = /( |^)#(\w+)( |$)/
+    user_regex = /( |^)@(\w+)( |$)/
     
     #TODO: make sure no one is typing javascript into the field **IMPORTANT**
 
     #replace #tags with links to that tag search
-    while c =~ tag
+    while c =~ tag_regex
       c.sub! "##{$2}", "<a href='/leaves?tagged=#{$2}'>##{$2}</a>"
     end
 
     #replace @usernames with links to that user, if user exists
-    while c =~ user
-      c.sub! "@#{$2}", "<a href='/users/#{$2}'>@#{$2}</a>"
+    while c =~ user_regex
+      user = $2
+      if User.find(user)
+        c.sub! "@#{$2}", "<a href='/users/#{$2}'>@#{$2}</a>"
+      end
     end
 
     #replace urls with links
