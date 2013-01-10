@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130107030829) do
+ActiveRecord::Schema.define(:version => 20130110024635) do
 
   create_table "badges_sashes", :force => true do |t|
     t.integer  "badge_id"
@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(:version => 20130107030829) do
 
   create_table "leaves", :force => true do |t|
     t.text     "content"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.integer  "user_id"
     t.string   "photo_file_name"
     t.string   "photo_content_type"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20130107030829) do
     t.datetime "photo_updated_at"
     t.date     "created_on"
     t.date     "updated_on"
+    t.boolean  "has_tags",           :default => false
   end
 
   create_table "merit_actions", :force => true do |t|

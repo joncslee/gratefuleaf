@@ -8,8 +8,10 @@
         <td><%= link_to leaf.created_at.strftime("%-I:%S %p"), leaf_path(leaf) %><br /><%= image_tag leaf.photo.url(:thumb) if leaf.has_photo %></td>
         <td><%= leaf.content.html_safe %></td>
         <td>
-          <% leaf.tags.each do |tag| %>
-            <a href="/leaves?tagged=<%= tag.name %>">#<%= tag.name %></a>
+          <% if leaf.has_tags %>
+            <% leaf.tags.each do |tag| %>
+              <a href="/leaves?tagged=<%= tag.name %>">#<%= tag.name %></a>
+            <% end %>
           <% end %>
         </td>
         <td><%= link_to "Destroy", leaf, :confirm => 'Are you sure?', :method => :delete %></td>

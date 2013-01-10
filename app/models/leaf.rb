@@ -37,6 +37,7 @@ class Leaf < ActiveRecord::Base
     #replace #tags with links to that tag search
     while c =~ tag_regex
       c.sub! "##{$2}", "<a href='/leaves?tagged=#{$2}'>##{$2}</a>"
+      self.has_tags = true
     end
 
     #replace @usernames with links to that user, if user exists
@@ -60,7 +61,10 @@ class Leaf < ActiveRecord::Base
   def save_tags
     # extract hashtags
     content.scan(/(?:\s|^|>)(?:#(?!(?:\d+|\w+?_|_\w+?)(?:\s|$)))(\w+)(?=\s|$|<)/i) do |match|
-      self.tags.create(:name => match.first)
+      # only create tags for this leaf if it is unique
+      if self.tags.find_by_name(match.first).nil?
+        self.tags.create(:name => match.first)
+      end
     end
   end
 
