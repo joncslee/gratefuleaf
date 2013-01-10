@@ -5,6 +5,8 @@ class LeavesController < ApplicationController
 
   def index
     @leaves = current_user.leaves.reverse
+
+    @leaves_by_day = @leaves.group_by { |leaf| leaf.created_at.beginning_of_day }
   end
 
   def new

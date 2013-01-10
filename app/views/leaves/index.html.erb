@@ -1,16 +1,20 @@
-<a class="btn" href="/leaves/new">New Leaf</a>
 <table>
-  <% @leaves.each do |leaf| %>
-    <tr>
-      <td><%= link_to leaf.created_at.to_formatted_s(:short), leaf_path(leaf) %><br /><%= image_tag leaf.photo.url(:thumb) if leaf.has_photo %></td>
-      <td><%= leaf.content.html_safe %></td>
-      <td>
-        <% leaf.tags.each do |tag| %>
-          <a href="/leaves?tagged=<%= tag.name %>">#<%= tag.name %></a>
-        <% end %>
-      </td>
-      <td><%= link_to "Destroy", leaf, :confirm => 'Are you sure?', :method => :delete %></td>
+  <% @leaves_by_day.each do |day, leaves| %>
+    <tr class="day-header">
+      <td><%= day.strftime("%A, %b %d, %Y") %></td>
     </tr>
+    <% leaves.each do |leaf| %>
+      <tr>
+        <td><%= link_to leaf.created_at.strftime("%-I:%S %p"), leaf_path(leaf) %><br /><%= image_tag leaf.photo.url(:thumb) if leaf.has_photo %></td>
+        <td><%= leaf.content.html_safe %></td>
+        <td>
+          <% leaf.tags.each do |tag| %>
+            <a href="/leaves?tagged=<%= tag.name %>">#<%= tag.name %></a>
+          <% end %>
+        </td>
+        <td><%= link_to "Destroy", leaf, :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+    <% end %>
   <% end %>
 </table>
 
