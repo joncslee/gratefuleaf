@@ -2,12 +2,49 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
 div.leaf-feed {
   float: left;
-  width: 70%;
+  background: #ededed;
+  padding-left: 120px;
 }
 
-div.leaf-progress {
-  float: right;
-  width: 20%;
+div.leaf-feed .day-header {
+  margin-left: -50px;
+  background-color: white;
+  padding: 10px 10px 10px 50px;
+  display: inline-block;
+  margin-bottom: 20px;
 }
+div.leaf-feed .day-header h3 {
+  padding: 0;
+  margin: 0;
+  font-weight: normal;
+}
+
+div.leaf-feed .leaf {
+  padding: 10px;
+  margin-bottom: 20px;
+  display: inline-block;
+  background-color: white;
+}
+
+div.leaf-stats {
+  float: right;
+  width: 240px;
+  background: #999;
+  padding: 20px;
+}
+
+.leaf-stats .stat-box {
+  background: white;
+  padding: 10px;
+  width: 90px;
+  float: left;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.leaf-stats .stat-box1 { margin-right: 20px; }
+.leaf-stats .progress-box { text-align: center; } 
+.leaf-stats .progress { margin-bottom: 5px; }
