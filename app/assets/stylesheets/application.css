@@ -15,24 +15,29 @@
 body {
   padding-top: 20px;
   padding-bottom: 40px;
-  background-color: #E7FFE3 !important;
+  background-color: #E3FFFE !important;
+}
+
+.wrapper {
+  margin-left: 100px;
 }
 
 header {
-  padding: 20px 0 40px 0;
+  padding: 20px 0 20px 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px dashed green;
 }
 
+
 header .logo {
+  display: inline;
 }
 
 .content {
-  background-color: white;
+  width: 100%;
+  float: left;
 }
 
-#container {
-  margin: 0 auto;
-  max-width: 900px;
-}
 
 .jumbotron {
   margin: 60px 0;
