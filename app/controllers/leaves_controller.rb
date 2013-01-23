@@ -4,7 +4,14 @@ class LeavesController < ApplicationController
   before_filter :require_login
 
   def index
-    @leaves = current_user.leaves.reverse
+    if params[:tagged]
+      tags = Tag.where("name = ?", params[:tagged])
+      @leaves = tags.map do |tag|
+        tag.leaf
+      end
+    else
+      @leaves = current_user.leaves.reverse
+    end
 
     @leaves_by_day = @leaves.group_by { |leaf| leaf.created_at.beginning_of_day }
   end

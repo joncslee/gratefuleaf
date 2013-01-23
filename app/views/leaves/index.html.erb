@@ -1,3 +1,6 @@
+<% if params[:tagged] %>
+  <h2>Tagged as: <%= params[:tagged] %></h2>
+<% end %>
 <div class="leaf-feed">
   <table>
     <% @leaves_by_day.each do |day, leaves| %>
