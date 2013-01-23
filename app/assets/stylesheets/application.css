@@ -36,6 +36,7 @@ header .logo {
 .content {
   width: 100%;
   float: left;
+  margin-bottom: 100px;
 }
 
 
