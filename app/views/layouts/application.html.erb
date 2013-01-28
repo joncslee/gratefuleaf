@@ -55,7 +55,7 @@
 
   <%= yield %>
 
-<% if current_user %>
+<% if current_user && (params[:controller] != 'leaves' || params[:action] != 'new') %>
   <div style="margin-bottom: 40px;"></div>
   <div style=" padding: 10px; position: fixed; bottom: 0; width: 100%; height: 50px; background: grey; text-align: center;">
     <a class="small button" href="/leaves/new">New Leaf</a>

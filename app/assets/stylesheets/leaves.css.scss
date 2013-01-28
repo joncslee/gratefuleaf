@@ -10,7 +10,7 @@ div.leaf-feed {
 
 div.leaf-feed .day-header {
   margin-left: -50px;
-  background-color: white;
+  background-color: #e1e1e1;
   padding: 10px 10px 10px 50px;
   display: inline-block;
   margin-bottom: 20px;
@@ -50,6 +50,6 @@ div.leaf-stats {
 
 form.new_leaf textarea {
   height: 150px;
-  width: 300px;
+  width: 100%;
   display: block;
 }

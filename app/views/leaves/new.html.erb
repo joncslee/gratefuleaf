@@ -1,8 +1,12 @@
-<h2>What are you thankful for today?</h2>
-<%= form_for @leaf, :html => { :multipart => :true } do |form| %>
-  <%= form.error_messages %>
-  <%= form.text_area :content %>
-  <%= form.file_field :photo %><br /><br />
-  <%= form.submit 'Done!', :class => 'btn btn-primary' %>
-  <%= image_tag @leaf.photo.url if @leaf.has_photo %><br />
-<% end %>
+<div class="row">
+  <div class="six columns centered">
+    <h2>What are you thankful for today?</h2>
+    <%= form_for @leaf, :html => { :multipart => :true } do |form| %>
+      <%= form.error_messages %>
+      <%= form.text_area :content %>
+      <%= form.file_field :photo %><br /><br />
+      <%= form.submit 'Done!', :class => 'medium button' %>
+      <%= image_tag @leaf.photo.url if @leaf.has_photo %><br />
+    <% end %>
+  </div>
+</div>
