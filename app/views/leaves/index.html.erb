@@ -1,67 +1,70 @@
-<% if params[:tagged] %>
-  <h2>Tagged as: <%= params[:tagged] %></h2>
-<% end %>
-<div class="leaf-feed">
-  <table>
-    <% @leaves_by_day.each do |day, leaves| %>
-      <tr>
-        <td colspan=3>
-          <div class="day-header">
-            <h3><%= day.strftime("%A, %b %d, %Y") %></h3>
-          </div>
-        </td>
-      </tr>
-      <% leaves.each do |leaf| %>
+
+<div class="row leaf-feed">
+  <div class="nine columns">
+    <% if params[:tagged] %>
+      <h2>Tagged as: <%= params[:tagged] %></h2>
+    <% end %>
+    <table>
+      <% @leaves_by_day.each do |day, leaves| %>
         <tr>
-          <td>
-            <div class="leaf">
-              <%= link_to leaf.created_at.strftime("%-I:%M %p"), leaf_path(leaf) %><br /><%= image_tag leaf.photo.url(:thumb) if leaf.has_photo %>
-              <%= leaf.content.html_safe %><br />
-              <% if leaf.has_tags %>
-                <% leaf.tags.each do |tag| %>
-                  <a href="/leaves?tagged=<%= tag.name %>">#<%= tag.name %></a>
-                <% end %>
-              <% end %>
-              <%= link_to "Destroy", leaf, :confirm => 'Are you sure?', :method => :delete %>
+          <td colspan=3>
+            <div class="day-header">
+              <h3><%= day.strftime("%A, %b %d, %Y") %></h3>
             </div>
           </td>
         </tr>
+        <% leaves.each do |leaf| %>
+          <tr>
+            <td>
+              <div class="leaf">
+                <%= link_to leaf.created_at.strftime("%-I:%M %p"), leaf_path(leaf) %><br /><%= image_tag leaf.photo.url(:thumb) if leaf.has_photo %>
+                <%= leaf.content.html_safe %><br />
+                <% if leaf.has_tags %>
+                  <% leaf.tags.each do |tag| %>
+                    <a href="/leaves?tagged=<%= tag.name %>">#<%= tag.name %></a>
+                  <% end %>
+                <% end %>
+                <%= link_to "Destroy", leaf, :confirm => 'Are you sure?', :method => :delete %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
-    <% end %>
-  </table>
-</div>
-
-<div class="leaf-stats">
-
-  <div class="stat-box stat-box1">
-    <span class="data"><%= current_user.points %></span>
-    <label>Points</label>
-  </div>
-  <div class="stat-box stat-box2">
-    <span class="data"><%= current_user.leaves.size %></span>
-    <label>Leaves</label>
+    </table>
   </div>
 
-  <div class="progress-box">
-    <label>
-      <% if current_user.goal_type == User::DAILY_LEAF_GOAL %>
-        Daily Goal Progress: 
-        <%= current_user.daily_leaves.size %> / <%= current_user.daily_leaf_goal %>
-      <% elsif current_user.goal_type == User::WEEKLY_LEAF_GOAL %>
-        Weekly Goal Progress: 
-        <%= current_user.weekly_leaves.size %> / <%= current_user.weekly_leaf_goal %>
-      <% end %>
-    </label>
-    <div class="progress">
-      <div class="bar" style="width: <%= goal_percentage %>%;"></div>
+    <div class="leaf-stats">
+
+      <div class="stat-box stat-box1">
+        <span class="data"><%= current_user.points %></span>
+        <label>Points</label>
+      </div>
+      <div class="stat-box stat-box2">
+        <span class="data"><%= current_user.leaves.size %></span>
+        <label>Leaves</label>
+      </div>
+
+      <div class="progress-box">
+        <label>
+          <% if current_user.goal_type == User::DAILY_LEAF_GOAL %>
+            Daily Goal Progress: 
+            <%= current_user.daily_leaves.size %> / <%= current_user.daily_leaf_goal %>
+          <% elsif current_user.goal_type == User::WEEKLY_LEAF_GOAL %>
+            Weekly Goal Progress: 
+            <%= current_user.weekly_leaves.size %> / <%= current_user.weekly_leaf_goal %>
+          <% end %>
+        </label>
+        <div class="progress">
+          <div class="bar" style="width: <%= goal_percentage %>%;"></div>
+        </div>
+        <% if current_user.goal_type == User::DAILY_LEAF_GOAL %>
+          <%= current_user.daily_leaves.size %> / <%= current_user.daily_leaf_goal %>
+        <% elsif current_user.goal_type == User::WEEKLY_LEAF_GOAL %>
+          <%= current_user.weekly_leaves.size %> / <%= current_user.weekly_leaf_goal %>
+        <% end %>
+      </div>
+
     </div>
-    <% if current_user.goal_type == User::DAILY_LEAF_GOAL %>
-      <%= current_user.daily_leaves.size %> / <%= current_user.daily_leaf_goal %>
-    <% elsif current_user.goal_type == User::WEEKLY_LEAF_GOAL %>
-      <%= current_user.weekly_leaves.size %> / <%= current_user.weekly_leaf_goal %>
-    <% end %>
-  </div>
-
 </div>
 
 <div style="clear:both;"></div>

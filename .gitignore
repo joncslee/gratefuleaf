@@ -21,3 +21,6 @@
 # Ignore user-uploaded images
 /public/system/users
 /public/system/leaves
+
+# Ignore pre-compiled assets
+/public/assets
