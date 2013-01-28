@@ -54,9 +54,7 @@
             <%= current_user.weekly_leaves.size %> / <%= current_user.weekly_leaf_goal %>
           <% end %>
         </label>
-        <div class="progress">
-          <div class="bar" style="width: <%= goal_percentage %>%;"></div>
-        </div>
+          <div class="progress radius twelve"><span class="meter" style="width: <%= goal_percentage %>%;"></span></div>
         <% if current_user.goal_type == User::DAILY_LEAF_GOAL %>
           <%= current_user.daily_leaves.size %> / <%= current_user.daily_leaf_goal %>
         <% elsif current_user.goal_type == User::WEEKLY_LEAF_GOAL %>
