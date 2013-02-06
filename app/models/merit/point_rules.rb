@@ -13,13 +13,13 @@ module Merit
     include Merit::PointRulesMethods
 
     def initialize
-      # score 2, :on => 'leaves#create' do |leaf|
-      #   leaf.content? && !leaf.photo_file_name?
-      # end
+      score 2, :on => 'leaves#create' do |leaf|
+        leaf.content? && !leaf.photo_file_name?
+      end
 
-      # score 3, :on => 'leaves#create' do |leaf|
-      #   leaf.content? && leaf.photo_file_name?
-      # end
+      score 3, :on => 'leaves#create' do |leaf|
+        leaf.content? && leaf.photo_file_name?
+      end
       #
       # score 15, :on => 'reviews#create', :to => [:reviewer, :reviewed]
       #
