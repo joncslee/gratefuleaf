@@ -2,10 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
 div.leaf-feed {
   float: left;
-  background: #ededed;
 }
 
 div.leaf-feed .day-header {
@@ -29,10 +27,12 @@ div.leaf-feed .leaf {
 }
 
 div.leaf-stats {
+  @include border-radius(10px);
   float: right;
   width: 240px;
-  background: #999;
+  background: $wood-brown;
   padding: 20px;
+  margin-right: 15px;
 }
 
 .leaf-stats .stat-box {

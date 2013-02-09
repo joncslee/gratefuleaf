@@ -1,4 +1,6 @@
 @import "foundation/common/ratios";
+@import "compass";
+@import "compass/layout";
 
 // Settings file containing Foundation defaults
 
@@ -245,4 +247,14 @@ $mainColor: green;
 // https://github.com/scottkellum/modular-scale by scottkellum
 @import 'foundation';
 
+body { 
+  padding-left: 70px; 
+  background-image: url('/assets/trunk.png'), url('/assets/landscape1.png'), url('/assets/sky-gradient.png');
+  background-position: left top, left bottom, left top;
+  background-repeat: repeat-y, repeat-x, repeat-x;
+  background-attachment: scroll, fixed, scroll;
+  background-color: #cfdeff;
+}
+
 .row { width: 100%; }
+
