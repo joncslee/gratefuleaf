@@ -13,4 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation
+//= require highcharts
+//= require exporting 
 //= require_tree .

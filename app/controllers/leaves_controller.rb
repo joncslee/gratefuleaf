@@ -16,6 +16,42 @@ class LeavesController < ApplicationController
     @leaves_by_day = @leaves.group_by { |leaf| leaf.created_at.beginning_of_day }
   end
 
+
+  def stats
+    leaves = Leaf.count(
+      :conditions => ["created_at >= ?", 14.days.ago],
+      :group => "DATE(created_at)"
+    )
+
+    leaves_array = []
+    14.downto(0) do |d|
+      # Mon, 28 Jan 2013
+      date = d.days.ago.strftime('%a, %d %b %Y').to_date
+      leaves_array << (leaves[date] || 0)
+    end
+
+
+    @h = LazyHighCharts::HighChart.new('graph') do |f|
+      f.options[:chart][:type] = "column"
+      f.options[:chart][:inverted] = false
+      f.options[:chart][:backgroundColor] = '#D0A34F'
+      f.options[:legend][:enabled] = false
+      f.options[:title][:text] = "Leaves in the Past 14 Days"
+      f.options[:plotOptions] = {column: 
+                                  {
+                                    shadow: false, 
+                                    borderWidth: 0, 
+                                    pointInterval: 1.day, 
+                                    pointStart: 14.days.ago
+                                  }
+                                }
+      f.xAxis(:type => 'datetime', :labels => {:align => 'center'}, :dateTimeLabelFormats => { day: '%b %e' })
+      f.yAxis(:title => {:text => 'Leaves'}, :allowDecimals => false, :gridLineWidth => 0, :lineWidth => 1)
+
+      f.series(:name=>'Leaves', :data=>leaves_array, :color => '#426226')
+    end
+  end
+
   def new
     @leaf = Leaf.new
   end

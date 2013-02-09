@@ -47,3 +47,4 @@ gem "authlogic"
 gem "paperclip", "~> 3.0"
 gem "merit", ">= 1.3.1"
 gem "friendly_id", "~> 4.0.1"
+gem 'lazy_high_charts'

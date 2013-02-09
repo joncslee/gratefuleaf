@@ -9,6 +9,8 @@ Gratefuleaf::Application.routes.draw do
 
   resources :users
 
+  # non-RESTful routes must happen before resources
+  match 'leaves/stats' => 'leaves#stats'
   resources :leaves
 
   # The priority is based upon order of creation:

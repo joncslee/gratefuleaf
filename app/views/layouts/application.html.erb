@@ -13,7 +13,7 @@
 	<!-- Set the viewport width to device width for mobile -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
-	<title><%= content_for?(:title) ? Gratefuleaf - yield(:title) : "Gratefuleaf - Be Happier!" %></title>
+  <title><%= content_for?(:title) ? "Gratefuleaf - #{yield(:title)}" : "Gratefuleaf - Be Happier!" %></title>
   
 	<!-- Included CSS Files -->
   <link href='http://fonts.googleapis.com/css?family=Original+Surfer' rel='stylesheet' type='text/css'>
