@@ -3,9 +3,10 @@ class Leaf < ActiveRecord::Base
   has_many :tags, :dependent => :destroy
 
   # named scopes for tracking the day's leaves and the week's leaves
-  scope :created_today, lambda { where("created_at >= ? && created_at < ?", DateTime.now.beginning_of_day, DateTime.now.end_of_day) }
-  scope :created_this_week, lambda { where("created_on >= ? && created_on < ?", Date.today.beginning_of_week, Date.today.end_of_week) }
-
+  scope :created_today, lambda { { :conditions => ["created_at >= ? AND created_at < ?", DateTime.now.beginning_of_day, DateTime.now.end_of_day] } }
+  scope :created_this_week, lambda { { :conditions => ["created_on >= ? AND created_on < ?", Date.now.beginning_of_week, Date.now.end_of_week] } }
+  
+  
   attr_accessible :content, :photo
 
   validates_presence_of :content
