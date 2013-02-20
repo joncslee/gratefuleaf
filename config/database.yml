@@ -25,10 +25,8 @@ test:
   password:
 
 production:
-  adapter: mysql2
+  adapter: postgresql
   encoding: utf8
   database: gratefuleaf_production
-  pool: 5
-  timeout: 5000
   username: root
   password:
