@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 
   acts_as_authentic
   attr_accessible :first_name, :last_name, :username, :email, :password, :password_confirmation, :avatar, :goal_type, :daily_leaf_goal, :weekly_leaf_goal, :time_zone
+  attr_accessor :password_confirmation
 
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
 
